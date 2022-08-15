@@ -1,0 +1,38 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test-publish-hex:
+    name: It publishes a hex package in a folder
+    runs-on: ubuntu-latest
+    environment: Publish to hex
+    steps:
+      - uses: actions/checkout@v2
+      - uses: erlef/setup-beam@v1
+      - run: mix deps.get
+        working-directory: "elixir"
+      - name: Set unique package version
+        id: set-version
+        run: |
+          version=0.0.$GITHUB_RUN_NUMBER
+          mix bump $version
+          echo "::set-output name=version::$version"
+        working-directory: "elixir"
+      - name: Test the action
+        uses: ./
+        with:
+          hex-api-key: ${{ secrets.HEX_API_KEY }}
+          working-directory: "elixir"
+      - name: Assert that latest published package version is as expected
+        timeout-minutes: 1
+        run: |
+          version=0.0.0
+          # use an eventually loop to give hex's servers time to update
+          while [[ "$version" != "0.0.${{ github.run_number }}" ]]
+          do
+            version=$(mix hex.search cucumber_release_automation | tail -n1 | grep -Eo "\d+\.\d+\.\d+" --color=never)
+          done
