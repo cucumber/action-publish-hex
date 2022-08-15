@@ -12,7 +12,7 @@ runs:
   using: "composite"
   steps:
     - name: install dependencies
-      run: mix hex.deps get
+      run: mix deps get
       shell: bash
       working-directory: ${{ inputs.working-directory }}
     - name: publish package
