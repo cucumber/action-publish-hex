@@ -33,9 +33,9 @@ jobs:
       - name: Assert that latest published package version is as expected
         timeout-minutes: 1
         run: |
-          version=0.0.0
+          version=0.0.$GITHUB_RUN_NUMBER
           # use an eventually loop to give hex's servers time to update
-          while [[ "$version" != "0.0.${{ github.run_number }}" ]]
+          while [[ ! curl https://hex.pm/packages/cucumber_test_release_automation/$version ]]
           do
-            version=$(mix hex.search cucumber_release_automation | tail -n1 | grep -Eo "\d+\.\d+\.\d+" --color=never)
+            echo "Package $version not found. Trying again..."
           done
