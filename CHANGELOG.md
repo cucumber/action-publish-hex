@@ -7,4 +7,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-[Unreleased]: https://github.com/cucumber/action-publish-npm/compare/v0.0.0...HEAD
+[Unreleased]: https://github.com/cucumber/action-publish-hex/compare/v0.0.0...HEAD
