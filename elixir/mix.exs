@@ -1,9 +1,13 @@
 defmodule CucumberTestReleaseAutomation.MixProject do
   use Mix.Project
 
+  @github "https://github.com/cucumber/action-publish-hex"
+
   def project do
     [
       app: :cucumber_test_release_automation,
+      description: description(),
+      package: package(),
       version: "0.0.0",
       elixir: "~> 1.13",
       start_permanent: Mix.env() == :prod,
@@ -21,9 +25,22 @@ defmodule CucumberTestReleaseAutomation.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:versioce, "~> 1.1.2"}
+      {:versioce, "~> 1.1.2"},
+      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false}
       # {:dep_from_hexpm, "~> 0.3.0"},
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
+    ]
+  end
+
+  defp description() do
+    "Dummy package to test release automation scripts"
+  end
+
+  defp package() do
+    [
+      licenses: ["MIT"],
+      source_url: @github,
+      links: %{"GitHub" => @github}
     ]
   end
 end
