@@ -34,8 +34,4 @@ jobs:
         timeout-minutes: 1
         run: |
           version=0.0.$GITHUB_RUN_NUMBER
-          # use an eventually loop to give hex's servers time to update
-          while [[ ! curl https://hex.pm/packages/cucumber_test_release_automation/$version ]]
-          do
-            echo "Package $version not found. Trying again..."
-          done
+          curl https://hex.pm/packages/cucumber_test_release_automation/$version
