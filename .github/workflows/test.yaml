@@ -34,4 +34,4 @@ jobs:
         timeout-minutes: 1
         run: |
           version=0.0.$GITHUB_RUN_NUMBER
-          curl https://hex.pm/packages/cucumber_test_release_automation/$version
+          curl --silent --fail https://hex.pm/packages/cucumber_test_release_automation/$version > /dev/null
