@@ -32,5 +32,5 @@ jobs:
       - uses: cucumber/action-publish-hex@v1.0.0
         with:
           hex-api-token: ${{ secrets.HEX_API_TOKEN }}
-          working-directory: "elixir"
+          working-directory: "test"
 ```

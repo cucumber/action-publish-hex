@@ -17,19 +17,19 @@ jobs:
           otp-version: 25.0.3
           elixir-version: 1.13.4
       - run: mix deps.get
-        working-directory: "elixir"
+        working-directory: "test"
       - name: Set unique package version
         id: set-version
         run: |
           version=0.0.$GITHUB_RUN_NUMBER
           mix bump $version
           echo "::set-output name=version::$version"
-        working-directory: "elixir"
+        working-directory: "test"
       - name: Test the action
         uses: ./
         with:
           hex-api-key: ${{ secrets.HEX_API_KEY }}
-          working-directory: "elixir"
+          working-directory: "test"
       - name: Assert that latest published package version is as expected
         timeout-minutes: 1
         run: |
