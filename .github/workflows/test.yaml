@@ -6,6 +6,8 @@ on:
       - main
       - renovate/*
 
+permissions: {}
+
 jobs:
   test-publish-hex:
     name: It publishes a hex package in a folder
