@@ -31,7 +31,7 @@ jobs:
           echo "version=$version" >> $GITHUB_OUTPUT
         working-directory: "elixir"
       - name: Test the action
-        uses: ./
+        uses: $/
         with:
           hex-api-key: ${{ secrets.HEX_API_KEY }}
           working-directory: "elixir"
